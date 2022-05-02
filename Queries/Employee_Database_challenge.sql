@@ -12,7 +12,7 @@ INNER JOIN titles AS t
 WHERE (e.birth_date BETWEEN ('1951-01-01') AND ('1955-12-31'))
 ORDER BY e.emp_no;
 -- check the queried table:
-SELECT * FROM public.retirement_titles
+SELECT * FROM public.retirement_titles LIMIT 10
 
 -- Using Starter Code:
 -- Use Dictinct with Orderby to remove duplicate rows
@@ -38,7 +38,19 @@ GROUP BY ut.title
 ORDER BY count DESC;
 
 -- Check the queried table
-SELECT * FROM public.retirinG_titles LIMIT 7
+SELECT * FROM public.retiring_titles LIMIT 7
 
 
 -- **DELIVERABLE 2**
+SELECT DISTINCT ON (e.emp_no) e.emp_no, e.first_name, e.last_name, e.birth_date, de.from_date, de.to_date, ti.title
+INTO mentorship_eligibilty
+FROM employees AS e
+INNER JOIN dept_emp AS de
+	ON (e.emp_no = de.emp_no)
+INNER JOIN titles AS ti
+	ON (e.emp_no = ti.emp_no)
+WHERE de.to_date = '9999-01-01' AND (e.birth_date BETWEEN ('1965-01-01') AND ('1965-12-31'))
+ORDER BY e.emp_no
+
+-- Check the queried table
+SELECT * FROM public.mentorship_eligibilty LIMIT 10
